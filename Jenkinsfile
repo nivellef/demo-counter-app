@@ -50,7 +50,7 @@ pipeline{
                 
                 script{
                     
-                    withSonarQubeEnv(credentialsId: 'sonar-api-key') {
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
                         
                         sh 'mvn clean package sonar:sonar'
                     }
@@ -58,18 +58,17 @@ pipeline{
                     
                 }
             }
-            #stage('Quality Gate Status'){
+            # stage('Quality Gate Status'){
                 
-                #steps{
+               # steps{
                     
                    # script{
                         
-                        #waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key'
-                   # }
-               # } 
-                
-             #}
-        stage('Upload war file to nexus'){
+                       # waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
+                    #}
+               # }
+            #}
+            stage('Upload war file to nexus'){
 
                 steps{
 
@@ -91,11 +90,8 @@ pipeline{
                     }
                 }
             }
-        
-    }
-    
-    
-    
-    
+
+                
+        }
         
 }
